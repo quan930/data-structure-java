@@ -6,12 +6,12 @@ public class LinkedStack<E> implements IStack<E> {
     private Node<E> head;
 
     @Override
-    public void push(E e) {
+    synchronized public void push(E e) {
         head = new Node<>(e,head);
     }
 
     @Override
-    public E pop() {
+    synchronized public E pop() {
         if (isEmpty())
             return null;
         E item = head.item;
@@ -21,7 +21,7 @@ public class LinkedStack<E> implements IStack<E> {
     }
 
     @Override
-    public E peek() {
+    synchronized public E peek() {
         if (isEmpty())
             return null;
         else
@@ -29,7 +29,7 @@ public class LinkedStack<E> implements IStack<E> {
     }
 
     @Override
-    public boolean isEmpty() {
+    synchronized public boolean isEmpty() {
         return head==null;
     }
 

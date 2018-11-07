@@ -58,7 +58,7 @@ public class ArrayStack<E> implements IStack<E> {
         }
     }
 
-    private void decrease(){//缩容
+    synchronized private void decrease(){//缩容
         if (size<=capacity/2&&size>MIN_CAPACITY){
             capacity = capacity/2;
             array = Arrays.copyOf(array,capacity);
