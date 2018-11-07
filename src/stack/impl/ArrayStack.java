@@ -5,12 +5,15 @@ import stack.IStack;
 import java.util.Arrays;
 
 public class ArrayStack<E> implements IStack<E> {
+    private final int MIN_CAPACITY = 10;
     private int capacity;
     private int size;
     private E[] array;
 
     public ArrayStack(){
-        this(10);
+        capacity = MIN_CAPACITY;
+        this.array = (E[]) new Object[capacity];
+        this.size = 0;
     }
 
     public ArrayStack(int capacity){
@@ -28,10 +31,10 @@ public class ArrayStack<E> implements IStack<E> {
 
     @Override
     synchronized public E pop() {
+        decrease();
         E e = peek();
-        if (e!=null){
+        if (e!=null)
             array[--size] = null;
-        }
         return e;
     }
 
@@ -52,6 +55,13 @@ public class ArrayStack<E> implements IStack<E> {
         if (size>=capacity){
             capacity = capacity*2;
             array = Arrays.copyOf(array, capacity);
+        }
+    }
+
+    private void decrease(){//缩容
+        if (size<=capacity/2&&size>MIN_CAPACITY){
+            capacity = capacity/2;
+            array = Arrays.copyOf(array,capacity);
         }
     }
 }

@@ -3,6 +3,7 @@ package stack;
 public interface IStack<E> {
     /**
      * 进栈
+     * e!=null
      */
     void push(E e);
 
